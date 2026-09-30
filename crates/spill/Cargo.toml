@@ -1,0 +1,24 @@
+[package]
+name = "engine-mlx-spill"
+description = "SSD expert streaming for engine-mlx — mmap + madvise MoE weight streaming"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[features]
+# The MLX-gated forward/loader path wires spill's generic dispatch types
+# (LayerDescriptor/QWeight -> mmap'd mlx_arrays) to the real `engine_mlx_ffi`.
+# Enable with `--features mlx` (workspace) alongside the other crates.
+mlx = ["dep:engine-mlx-ffi"]
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+half.workspace = true
+memmap2.workspace = true
+safetensors.workspace = true
+sha1.workspace = true
+engine-mlx-ffi = { workspace = true, optional = true }
